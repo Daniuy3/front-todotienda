@@ -2,7 +2,7 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #34201B;
 }
 
 @theme inline {
@@ -10,17 +10,20 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-primary-50: #F5D6CA;
+  --color-primary-200: #D9B2A9;
+  --color-primary-400: #75493F;
+  --color-primary-600: #34201B;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+
+.mui-113d811-MuiFormLabel-root-MuiInputLabel-root.Mui-focused {
+  color: var(--foreground);
 }
