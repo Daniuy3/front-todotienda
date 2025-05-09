@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { SearchInput } from '../../shared/SearchInput'
-import { FaHome,  FaRegHeart, FaRegUser } from 'react-icons/fa'
+import { FaHome} from 'react-icons/fa'
 import {  BottomNavigation, BottomNavigationAction } from '@mui/material'
 import Link from 'next/link'
 import { FaShop } from 'react-icons/fa6'
