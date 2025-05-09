@@ -1,14 +1,15 @@
 
 
 import React from 'react'
-import { SearchInput } from '../shared/SearchInput'
-import { FaHome, FaPhone, FaRegHeart, FaRegUser } from 'react-icons/fa'
-import { IoCartOutline } from 'react-icons/io5'
-import { Badge, BottomNavigation, BottomNavigationAction } from '@mui/material'
+import { SearchInput } from '../../shared/SearchInput'
+import { FaHome,  FaRegHeart, FaRegUser } from 'react-icons/fa'
+import {  BottomNavigation, BottomNavigationAction } from '@mui/material'
 import Link from 'next/link'
 import { FaShop } from 'react-icons/fa6'
+import { CartIcon } from './CartIcon'
 
 export const TopBar = () => {
+
   return (
     <>
       <div className='fixed top-5 left-2 right-2 lg:left-32 lg:right-32 rounded-full bg-[rgb(255,255,255,0.6)] gap-5 lg:gap-0 shadow-md z-10 flex justify-between items-center px-10 py-2 backdrop-blur-sm'>
@@ -31,11 +32,7 @@ export const TopBar = () => {
           </div>
           
           <div className='hidden lg:flex justify-center items-center gap-3 text-lg'>
-            <FaRegUser />
-            <FaRegHeart />
-            <Badge badgeContent={4} color="secondary">
-              <IoCartOutline  size={24}/>
-            </Badge>
+            <CartIcon />
           </div>
       </div>
 
@@ -49,7 +46,7 @@ export const TopBar = () => {
         >
           <BottomNavigationAction href='/' LinkComponent={Link} label="Inicio" icon={<FaHome size={24} />}  />
           <BottomNavigationAction href='/tienda' LinkComponent={Link}  label="Tienda" icon={<FaShop size={24} />} />
-          <BottomNavigationAction href='/#' LinkComponent={Link}  label="Contacto" icon={<FaPhone size={24}/> } />
+          <BottomNavigationAction href='/carrito' LinkComponent={Link}  label="carrito" icon={<CartIcon /> } />
         </BottomNavigation>
       </div>
     </>
