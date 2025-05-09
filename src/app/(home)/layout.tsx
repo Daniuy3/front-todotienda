@@ -1,4 +1,4 @@
-import { TopBar } from "@/components/layout/TopBar";
+import { TopBar } from "@/components/layout/TopBar/TopBar";
 
 
 export default function Layout({children}: {children: React.ReactNode}) {

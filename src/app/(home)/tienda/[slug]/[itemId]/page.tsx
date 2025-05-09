@@ -1,9 +1,9 @@
 import { PageContainer } from "@/components/shared/PageContainer";
 import { ProductCard } from "@/components/shared/ProductCard";
 import { getCategoriesWithProducts, getCategoryBySlug } from "@/server/strapi";
-import { Button, Rating } from "@mui/material";
+import { Rating } from "@mui/material";
 import Image from "next/image";
-import { IoCartOutline } from "react-icons/io5";
+import { AddToCart } from "./AddToCart";
 
 export const revalidate = 86400; // 1 day
 export const dynamicParams = true
@@ -35,6 +35,7 @@ export default async function Page({
     const article = category.articles.find((article) => article.slug.split("/").at(-1) === itemId)
 
     const otherArticles = category.articles.filter((article) => article.slug.split("/").at(-1) !== itemId)
+
     if (!category) {
             return (
                 <PageContainer className="flex justify-center items-center h-screen">
@@ -55,7 +56,7 @@ export default async function Page({
         <div>
             <PageContainer className="pt-30 lg:pt-30 " >
                 <div className="flex flex-col-reverse lg:flex-row  gap-5 items-center">
-                    <div className="relative w-full max-w-[500px] lg:max-w-max lg:w-1/3 h-96 overflow-hidden shadow-lg">
+                    <div className="relative w-full max-w-[500px]  lg:w-1/3 h-96 overflow-hidden shadow-lg">
                         <Image 
                             src={article.cover.url}
                             alt={article.title}
@@ -92,23 +93,11 @@ export default async function Page({
                         <p className="text-lg text-gray-700 max-w-xl">
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.
                         </p>
-                        <div className="flex gap-5 items-center w-full lg:max-w-96">
-                            <Button
-                                variant='contained'
-                                sx={{
-                                    backgroundColor: 'rgb(255, 255, 255, 0.8)',
-                                    color: '#34201B',
-                                    marginTop: '1rem',
-                                    width: '100%',
-                                    '&:hover': {
-                                        backgroundColor: 'rgb(255, 255, 255, 0.9)',
-                                        opacity: 0.8,
-                                    },
-                                }}
-                                startIcon={<IoCartOutline />}
-                            >
-                                Agregar al Carrito
-                            </Button>
+                        
+                        <div className="w-full lg:max-w-96">
+                            <AddToCart 
+                                {...article}
+                            />
                         </div>
                     </div>
                 </div>
