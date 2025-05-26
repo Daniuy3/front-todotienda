@@ -17,9 +17,9 @@ export const Item = ({ item: {item, quantity} } : Props) => {
     const { addToCart, deleteItem, removeFromCart} = useCartStore()
 
   return (
-    <div  className="flex items-center md:gap-5 border-t-[1px] border-gray-300 py-5">
+    <div  className="flex flex-col md:flex-row items-center md:gap-5 border-t-[1px] border-gray-300 py-5">
         <div
-            className="relative w-16 h-16 md:w-24 md:h-24"
+            className="relative w-24 h-24 "
         >
             <div className="absolute inset-0 bg-gray-200 rounded-lg animate-pulse" style={{
                 zIndex: loading ? 1 : -1,
@@ -32,7 +32,7 @@ export const Item = ({ item: {item, quantity} } : Props) => {
                 alt={item.title}
                 width={100}
                 height={100}
-                className=" w-16 h-16 md:w-24 md:h-24 object-cover rounded-lg opacity-0"
+                className=" w-24 h-24  object-cover rounded-lg opacity-0"
                 priority={false}
                 loading="lazy"
                 onLoad={() => setLoading(false)}
@@ -44,8 +44,8 @@ export const Item = ({ item: {item, quantity} } : Props) => {
                 }}
             />
         </div>
-        <div className="flex flex-col flex-1 px-5">
-            <h3 className="text-xl font-bold">{item.title}</h3>
+        <div className="flex flex-col flex-1 px-5 items-center md:items-start">
+            <h3 className="text-xl font-bold text-center md:text-left">{item.title}</h3>
             <div className="flex items-center gap-5">
                 <p className="text-lg">${item.price}</p>
                 {

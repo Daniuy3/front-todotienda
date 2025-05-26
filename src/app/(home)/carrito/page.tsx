@@ -7,6 +7,7 @@ import { Button } from "@mui/material";
 import { LuSendHorizontal } from "react-icons/lu";
 import { useEffect, useState } from "react";
 import { CartDialog } from "./CartDialog";
+import { Hero } from "./Hero";
 
 
 export default function Page() {
@@ -24,55 +25,58 @@ export default function Page() {
 
 
     return (
-        <PageContainer className="pt-30 lg:pt-30 px-5 " >
-            <div
-                className="flex flex-col md:flex-row justify-between gap-5  mb-10"
-            >
-                <div className="flex flex-col gap-2">
-                    <h1 className="text-4xl md:text-6xl font-bold">Carrito</h1>
-                    <h2 className="text-xl md:text-2xl font-medium">Productos en el carrito</h2>
+        <>
+            <Hero />
+            <PageContainer className="pt-10 px-5 rounded-lg shadow-lg mb-20 bg-white w-11/12 mx-auto mt-36 " >
+                <div
+                    className="flex flex-col md:flex-row justify-between gap-5  mb-10"
+                >
+                    <div className="flex flex-col gap-2">
+                        <h1 className="text-4xl md:text-6xl font-bold">Carrito</h1>
+                        <h2 className="text-xl md:text-2xl font-medium">Productos en el carrito</h2>
+                    </div>
+
+                    <div className="flex flex-col">
+                        <Button
+                            style={{marginTop: "auto"}}
+                            variant="contained"
+                            endIcon={<LuSendHorizontal   size={20} />}
+                            color='inherit' 
+                            className='flex items-center gap-1'
+                            sx={{
+                                backgroundColor: "black",
+                                color: "white",
+                                "&:hover": {
+                                    backgroundColor: "gray",
+                                },
+                            }}
+                            disabled={disabled}
+                            onClick={() => setOpen(true)}
+                        >
+                            Enviar Pedido
+                        </Button>
+                    </div>
                 </div>
 
-                <div className="flex flex-col">
-                    <Button
-                        style={{marginTop: "auto"}}
-                        variant="contained"
-                        endIcon={<LuSendHorizontal   size={20} />}
-                        color='inherit' 
-                        className='flex items-center gap-1'
-                        sx={{
-                            backgroundColor: "black",
-                            color: "white",
-                            "&:hover": {
-                                backgroundColor: "gray",
-                            },
-                        }}
-                        disabled={disabled}
-                        onClick={() => setOpen(true)}
-                    >
-                        Enviar Pedido
-                    </Button>
+                <div
+                    className="grid grid-cols-1 lg:grid-cols-2 mb-20 "
+                >
+                    {
+                        cart.length > 0 ? (
+                            cart.map((cartItem, index) => (
+                                <Item  item={cartItem} key={`cartitem-${index}`}   />
+                            ))
+                        ) : (
+                            <p className="text-lg">No hay productos en el carrito</p>
+                        )
+                    }
                 </div>
-            </div>
 
-            <div
-                className="grid grid-cols-1 lg:grid-cols-2 mb-20 "
-            >
-                {
-                    cart.length > 0 ? (
-                        cart.map((cartItem, index) => (
-                            <Item  item={cartItem} key={`cartitem-${index}`}   />
-                        ))
-                    ) : (
-                        <p className="text-lg">No hay productos en el carrito</p>
-                    )
-                }
-            </div>
-
-            <CartDialog 
-                open={open}
-                onClose={() => setOpen(false)}
-            />
-        </PageContainer>
+                <CartDialog 
+                    open={open}
+                    onClose={() => setOpen(false)}
+                />
+            </PageContainer>
+        </>
     );
 }

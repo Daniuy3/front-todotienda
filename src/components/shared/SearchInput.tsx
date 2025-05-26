@@ -70,7 +70,6 @@ export const SearchInput = () => {
             },
           },
         }}
-        onChange={(e, value) => console.log({value})}
     />
   )
 }

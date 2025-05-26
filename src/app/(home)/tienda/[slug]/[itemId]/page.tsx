@@ -4,6 +4,7 @@ import { getCategoriesWithProducts, getCategoryBySlug } from "@/server/strapi";
 import { Rating } from "@mui/material";
 import Image from "next/image";
 import { AddToCart } from "./AddToCart";
+import { Hero } from "./Hero";
 
 export const revalidate = 86400; // 1 day
 export const dynamicParams = true
@@ -53,9 +54,10 @@ export default async function Page({
     }
 
     return (
-        <div>
-            <PageContainer className="pt-30 lg:pt-30 " >
-                <div className="flex flex-col-reverse lg:flex-row  gap-5 items-center">
+        <>
+            <Hero />
+            <PageContainer className="w-11/12 mx-auto bg-white p-8 mt-32 rounded-lg lg:px-20 shadow-lg mb-15">
+                <div className="flex flex-col-reverse lg:flex-row lg:justify-center gap-5 items-center">
                     <div className="relative w-full max-w-[500px]  lg:w-1/3 h-96 overflow-hidden shadow-lg">
                         <Image 
                             src={article.cover.url}
@@ -64,20 +66,15 @@ export default async function Page({
                             className="w-full h-auto rounded-lg shadow-lg object-cover"
                         />
                     </div>
-                    <div className="flex flex-col gap-5 lg:w-2/3 px-2 h-full justify-center items-start">
+                    <div className="flex flex-col gap-5 px-2 h-full justify-center items-start">
                     <div>
                         <h1 
-                            className="text-3xl w-2/3 lg:text-5xl font-bold text-primary-600 capitalize max-w-xl"
+                            className="text-3xl lg:text-5xl font-bold text-primary-600 capitalize   "
                         >
-                            Conoce nuestro Producto de
-                        <span
-                                className="text-2xl lg:text-4xl font-bold text-primary-400 block"
-                        >
-                                {article.title}
-                        </span>
+                            {article.title}
                         </h1>
 
-                        <div className=" text-md flex gap-5 items-center">
+                        <div className=" text-md flex gap-5 items-center justify-center lg:justify-start">
                             <Rating
                                 name="read-only"
                                 value={4.5}
@@ -85,16 +82,16 @@ export default async function Page({
                                 precision={0.5}
                                 size="large"
                             />
-                            <span className=" font-light text-gray-700">4.5/5</span>
+                            <span className=" font-light text-gray-700">4.5</span>
                         </div>
 
                     </div>
 
                         <p className="text-lg text-gray-700 max-w-xl">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.
+                            {article.description}
                         </p>
                         
-                        <div className="w-full lg:max-w-96">
+                        <div className="w-full lg:max-w-96 mt-auto">
                             <AddToCart 
                                 {...article}
                             />
@@ -103,33 +100,24 @@ export default async function Page({
                 </div>
                 <div className="pb-30 px-2">
                     <h2
-                        className="lg:text-4xl text-2xl font-bold text-primary-600 capitalize max-w-96 mt-10 mb-5"
+                        className="lg:text-4xl text-2xl font-bold text-primary-600 capitalize mt-10 mb-5"
                     >
-                        Ver más productos de la categoría 
-                        <span
-                            className="lg:text-4xl text-2xl font-bold text-primary-400 block"
-                        >
-                            {category.name}
-                        </span>
+                        Productos Relacionados
                     </h2>
 
-                        <div className="flex overflow-x-auto w-full gap-5 h-96 py-2">
+                        <div className="gap-5 py-2 flex flex-wrap bg-white justify-center ">
                             {
                                 otherArticles.map((article) => (
-                                    <ProductCard 
-                                        key={article.id}
-                                        description={article.description??""}
-                                        image={article.cover.url}
-                                        title={article.title}
-                                        price={article.price}
-                                        slug={article.slug}
-                                        className="min-w-[300px]"
+                                    <ProductCard
+                                        key={article.id + "" + article.slug} 
+                                        product={article}
+                                        className="max-w-80 min-w-72"
                                     />
                                 ))
                             }
                         </div>
                 </div>
             </PageContainer>
-        </div>
+        </>
     );
 }
