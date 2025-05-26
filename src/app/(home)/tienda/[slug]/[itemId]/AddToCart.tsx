@@ -4,7 +4,6 @@ import { MonthlyArticle } from '@/server/strapi'
 import { useCartStore } from '@/stores/cartstore'
 import { Button } from '@mui/material'
 import React from 'react'
-import { IoCartOutline } from 'react-icons/io5'
 
 interface Props {
     cover: MonthlyArticle['cover']
@@ -18,7 +17,8 @@ interface Props {
 
 export const AddToCart = ({ available, cover, price, title, id, discount_price } : Props) => {
 
-    const { addToCart } = useCartStore()
+    const { addToCart,removeFromCart,getProductById } = useCartStore()
+    const quantity = getProductById(id)?.quantity || 0
     const handleAddToCart = () => {
         addToCart({
             cover,
@@ -31,23 +31,34 @@ export const AddToCart = ({ available, cover, price, title, id, discount_price }
     }
 
   return (
-    <Button
-        variant='contained'
-        sx={{
-            backgroundColor: 'rgb(255, 255, 255, 0.8)',
-            color: '#34201B',
-            marginTop: '1rem',
-            width: '100%',
-            '&:hover': {
-                backgroundColor: 'rgb(255, 255, 255, 0.9)',
-                opacity: 0.8,
-            },
-        }}
-        startIcon={<IoCartOutline />}
-        onClick={handleAddToCart}
-    >
-        Agregar al Carrito
-    </Button>
+                <div className='mt-auto flex'>
+                    <Button
+                        hidden={!quantity}
+                        onClick={() => removeFromCart(id)}
+                    color='error' 
+                    >
+                        -
+                    </Button>
+    
+                    <Button 
+                        variant='contained' 
+                        color='error' 
+                        className='w-full'
+                        onClick={quantity ? undefined : () => handleAddToCart() }
+                        >
+                        {
+                            quantity ? quantity : "Añadir al carrito"
+                        }
+                    </Button>
+    
+                    <Button
+                        color='error' 
+                        hidden={!quantity}
+                        onClick={() => handleAddToCart()}
+                    >
+                        +
+                    </Button>
+                </div>
     
 
   )

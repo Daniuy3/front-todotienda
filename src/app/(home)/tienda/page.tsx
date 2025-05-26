@@ -44,22 +44,18 @@ export default async function Page() {
                 paddingRight:0,
             }}
         >
-            <div className="lg:w-11/12 mx-auto bg-white -translate-y-5 lg:-translate-y-28 lg:px-20 py-10 px-2 lg:rounded-lg shadow-lg">
+            <div className="lg:w-11/12 mx-auto bg-white -translate-y-5 lg:-translate-y-28 lg:px-20 py-10 px-2 lg:rounded-lg shadow-lg mg-whi">
                 {
                     categories.map((category) => (
                         <div key={category.id} className="mb-10">
                             <h3 className="text-3xl font-bold mb-5 text-primary-400 capitalize">{category.name}</h3>
-                            <div className="flex overflow-x-auto w-full gap-5 h-96 py-2">
+                            <div className="flex overflow-x-auto w-full gap-5 py-4">
                                 {
                                     category.articles.map((article) => (
                                         <ProductCard 
                                             key={article.id}
-                                            description={article.description??""}
-                                            image={article.cover.url}
-                                            title={article.title}
-                                            slug={article.slug}
-                                            price={article.price}
-                                            className="min-w-72 h-full"
+                                            product={article}
+                                            className="max-w-72 min-w-72"
                                         />
                                     ))
                                 }

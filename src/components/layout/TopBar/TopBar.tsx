@@ -24,7 +24,6 @@ export const TopBar = () => {
               >
                   <p >Tienda</p>
               </Link>
-              <p>Contacto</p>
           </div>
 
           <div className="w-full lg:w-2/3">

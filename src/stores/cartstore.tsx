@@ -18,12 +18,13 @@ interface StoreActions extends CartStoreState {
     removeFromCart: (itemId: number) => void;
     clearCart: () => void;
     deleteItem: (itemId: CartItem["id"]) => void;
+    getProductById: (itemId: CartItem["id"]) => CartStoreItem | undefined;
 }
 
 
 export const useCartStore = create<StoreActions>()(
     persist(
-        (set) => ({
+        (set,get) => ({
             cart: [],
             addToCart: (item) => set((state) => {
                 const existingItem = state.cart.find((cartItem) => cartItem.item.id === item.id);
@@ -60,6 +61,8 @@ export const useCartStore = create<StoreActions>()(
             deleteItem: (itemId) => set((state) => ({
                 cart: state.cart.filter((cartItem) => cartItem.item.id !== itemId),
             })),
+
+            getProductById: (itemId) => get().cart.find((cartItem) => cartItem.item.id === itemId)
         }),
         {
             name: 'cart-storage',

@@ -54,11 +54,11 @@ export const Categories = () => {
             )
           }
           {
-            categories.map(({cover,id,name,slug}) => (
+            categories.map(({cover,name,slug}) => (
 
                 <CategoryCard
                   alt={name}
-                  key={id}
+                  key={slug}
                   href={'/tienda/' + slug}
                   title={name}
                   image={cover.formats.medium.url}
